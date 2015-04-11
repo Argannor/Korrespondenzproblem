@@ -10,16 +10,14 @@
 \uselanguage{ngerman}
 
 \title{Korrespondenzproblem}
-\subtitle{Subtitle}
+%\subtitle{Subtitle}
 \author{Soeren Berken-Mersmann}
 \institute
 {
-  Duale Hochschule Baden-Württemberg\\
-  Karlsruhe
+  DHBW Karlsruhe
 }
 \date{17. April 2015}
 \subject{Theoretische Informatik}
-
 
 \begin{document}
 \frame{\titlepage}
@@ -59,9 +57,9 @@
 	
 	% Anwendungszweck? Simulation einer Turingmaschine
 	
-	Das bisher sehr abstrakte PKP kann dazu verwendet werden eine Turingmaschine zu simulieren. \newline
+	Um die zu Beweisen, dass das PKP nicht berechenbar ist, werden wir eine Turingmaschine simulieren.\newline
 	
-	Zuerst müssen wir den Rechenweg einer Turingmaschine formalisieren. \newline
+	Dafür müssen wir zuerst den Rechenweg einer Turingmaschine formalisieren. \newline
 } \frame {
 	\begin{block}{Zustand einer Turingmaschine}
 	% Bild einfügen
@@ -80,12 +78,21 @@
 	\end{block}
 } \frame {	
 	\begin{block}{Beispiel}
-	$0110101q_010010\sharp01101011q_100010$ \newline
-	Der Lesekopf liest eine $1$ und befindet sich in Zustand $q_0$, die Regel die Anwendung gefunden hat ist $q_10R$.
+	Formalisierte Darstellung: $0110101,q_01,0010\sharp01101011,q_10,0010$ \newline
+	Der Lesekopf liest eine $1$ und befindet sich in Zustand $q_0$, die Regel die Anwendung gefunden hat ist $q_01 \rightarrow q_10R$.
+	\end{block}	
+	\pause[2]
+	\begin{block}{Simulation der Regel $q_10 \rightarrow q_11$}
+%	$0110101q_010010\sharp01101011q_100010\sharp\pause[2]0\pause[3]1\pause[4]1\pause[5]0\pause[6]1\pause[7]0\pause[8]1\pause[9]11q_1\pause[10]0\pause[11]010\pause[12]\sharp$\newline
+%	$\pause[1]0110101q_010010\sharp\pause[2]0\pause[3]1\pause[4]1\pause[5]0\pause[6]1\pause[7]0\pause[8]1\pause[9]1q_10\pause[10]0\pause[11]010\pause[12]\sharp$
+	$0110101q_010010\sharp01101011q_100010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]11q_1\pause[11]0\pause[12]010\pause[13]\sharp$\newline
+	$\pause[2]0110101q_010010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1q_10\pause[11]0\pause[12]010\pause[13]\sharp$
 	\end{block}
 	
-	
-	
+} \frame {
+	% An dieser Stelle dann die genauen Regeln vorstellen (s. Wegener)
+	% Die wichtigen im Detail (Kopier-Regeln, Zustandsübergangsregeln)
+	% Und die "unwichtigen" nennen
 	
 }
 
@@ -98,9 +105,7 @@
 
 \frame{
 	\frametitle{Beweise weiterer Probleme}
-	\begin{block}{}
-		Seien $G_1$ und $G_2$ zwei kontextfreie Grammatiken, und $L_1 = L(G_1)$ und $L_2 = L(G_2)$ zwei daraus konstruierte kontextfreie Sprachen.
-	\end{block}
+	Seien $G_1$ und $G_2$ zwei kontextfreie Grammatiken, und $L_1 = L(G_1)$ und $L_2 = L(G_2)$ zwei daraus konstruierte kontextfreie Sprachen.
 	
 	\begin{block}{Eindeutigkeit}
 	Ist $G_1$ eindeutig?
