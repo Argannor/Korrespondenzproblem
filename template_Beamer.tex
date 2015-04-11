@@ -1,0 +1,129 @@
+\documentclass{beamer}
+
+
+
+\usepackage[ngerman]{babel}
+\usepackage{default}
+\usepackage[utf8]{inputenc}
+\usetheme{Berlin}
+\usecolortheme{beaver}
+\uselanguage{ngerman}
+
+\title{Korrespondenzproblem}
+\subtitle{Subtitle}
+\author{Soeren Berken-Mersmann}
+\institute
+{
+  Duale Hochschule Baden-Württemberg\\
+  Karlsruhe
+}
+\date{17. April 2015}
+\subject{Theoretische Informatik}
+
+
+\begin{document}
+\frame{\titlepage}
+
+\frame{
+	\frametitle{Gliederung}
+	
+	\begin{enumerate}
+		\item Postsches Korrespondenzproblem
+		\item Simulation einer Turingmaschine
+		\item Beweis der Nichtberechenbarkeit
+		\item Beweise weiterer Probleme
+	\end{enumerate}
+}
+
+\frame{
+	\frametitle{Postsches Korrespondenzproblem}
+	
+	% Analogie von Dominosteinen verwenden, Bilder inkludieren.
+	
+	% Beispiele, einfach lösbare, und unlösbare
+	% % Zuerst hier anschaulich darstellen was das Korrespondenzproblem ist
+	% % Anschließend die allgemeine Beschreibung des Problems vorstellen
+}
+
+\frame{
+	\frametitle{Postsches Korrespondenzproblem (formell)}
+	
+	\begin{block}{Definition des PKP}
+	Gegeben sei eine endliche Menge an Wortpaaren $K = ((x_1, y_1), ..., (x_k, y_k))$, über dem Alphabet $\Sigma$ mit $x_i, y_i \in \Sigma$. Gibt es eine Folge von Indizes $i_1, i_2, ..., i_n \in {1, 2, ..., k}, n \geq 1$, so dass $x_{i_1},x_{i_2}, ... x_{i_n} = y_{i_1}, y_{i_2}, ..., y_{i_n}$.
+	\end{block}
+	
+}
+
+\frame{
+	\frametitle{Simulation einer Turingmaschine}
+	
+	% Anwendungszweck? Simulation einer Turingmaschine
+	
+	Das bisher sehr abstrakte PKP kann dazu verwendet werden eine Turingmaschine zu simulieren. \newline
+	
+	Zuerst müssen wir den Rechenweg einer Turingmaschine formalisieren. \newline
+} \frame {
+	\begin{block}{Zustand einer Turingmaschine}
+	% Bild einfügen
+	\begin{itemize}
+		\item Linkskontext: $u$
+		\item Interner Zustand: $q$
+		\item Gelesenes Symbol: $a$
+		\item Rechtskontext: $w$
+	\end{itemize}
+	Somit lässt sich der Zustand $Q_t$ einer Turingmaschine zum Zeitpunkt $t$ durch die Folge $u_tq_ta_tw_t$ darstellen.
+	\end{block}
+	
+	\begin{block}{Rechenweg}
+	Den Rechenweg einer Turingmaschine können wir als die Folge von Zuständen $Q_0, ..., Q_n$ vom Startzeitpunkt $t = 0$ bis zum Endzeitpunkt $t = n$ bei dem die Turingmaschine einen der Endzustände erreicht hat.
+	% Formulierung überarbeiten 
+	\end{block}
+} \frame {	
+	\begin{block}{Beispiel}
+	$0110101q_010010\sharp01101011q_100010$ \newline
+	Der Lesekopf liest eine $1$ und befindet sich in Zustand $q_0$, die Regel die Anwendung gefunden hat ist $q_10R$.
+	\end{block}
+	
+	
+	
+	
+}
+
+\frame{
+	\frametitle{Beweis der Nichtberechenbarkeit}
+	
+	% % Halteproblem
+	% % Reduktion
+}
+
+\frame{
+	\frametitle{Beweise weiterer Probleme}
+	\begin{block}{}
+		Seien $G_1$ und $G_2$ zwei kontextfreie Grammatiken, und $L_1 = L(G_1)$ und $L_2 = L(G_2)$ zwei daraus konstruierte kontextfreie Sprachen.
+	\end{block}
+	
+	\begin{block}{Eindeutigkeit}
+	Ist $G_1$ eindeutig?
+	\end{block}
+	
+	\begin{block}{Gleichheit}
+	Ist $L_1 = L_2$?
+	\end{block}
+}
+
+\frame{
+	\frametitle{Eindeutigkeit}
+	
+	% % Beweis entsprechend führen
+}
+
+\frame{
+	\frametitle{Gleichheitstest}
+	
+	% % Beweis
+}
+
+\frame{
+	\frametitle{Vielen Dank für Ihre Aufmerksamkeit!}
+}
+\end{document}
