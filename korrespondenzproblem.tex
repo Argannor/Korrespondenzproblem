@@ -5,6 +5,10 @@
 \usepackage[ngerman]{babel}
 \usepackage{default}
 \usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
 \usetheme{Berlin}
 \usecolortheme{beaver}
 \uselanguage{ngerman}
@@ -36,11 +40,83 @@
 \frame{
 	\frametitle{Postsches Korrespondenzproblem}
 	
+	
+	\[\begin{bmatrix}
+		1 \\ 111
+	\end{bmatrix}
+	\begin{bmatrix}
+		10111 \\ 10
+	\end{bmatrix}
+	\begin{bmatrix}
+		10 \\ 0
+	\end{bmatrix}\]
+	\newline\newline
+	Wer findet eine Reihenfolge, so dass unten und oben jeweils die gleiche Folge steht?
+	\newline\newline
+	\pause
+	\[I_1 = (2, 1, 1, 3): \begin{bmatrix}
+			10111 \\ 10
+		\end{bmatrix} \begin{bmatrix}
+				1 \\ 111
+			\end{bmatrix} \begin{bmatrix}
+					1 \\ 111
+				\end{bmatrix} \begin{bmatrix}
+						10 \\ 0
+					\end{bmatrix}
+	\]
 	% Analogie von Dominosteinen verwenden, Bilder inkludieren.
 	
 	% Beispiele, einfach lösbare, und unlösbare
 	% % Zuerst hier anschaulich darstellen was das Korrespondenzproblem ist
 	% % Anschließend die allgemeine Beschreibung des Problems vorstellen
+}\frame{
+	\[\begin{bmatrix}
+		001 \\ 0
+	\end{bmatrix}
+	\begin{bmatrix}
+		01 \\ 011
+	\end{bmatrix}
+	\begin{bmatrix}
+		01 \\ 101
+	\end{bmatrix}
+	\begin{bmatrix}
+		10 \\ 001
+	\end{bmatrix}\]
+	\newline\newline
+	Wer findet hierfür eine Lösung?
+	
+	\pause
+	
+	\[I_1 = (2, 4, 3, 4, 4, 2, 1, 2, 4, 3, 4, 3, 4, 4, 3, 4, 4, 2, 1, 4, 4, 2, 1, 3, 4, 1, 1, 3,
+	... )\]
+}\frame{
+
+Und eine weitere Probleminstanz:
+
+		\[\begin{bmatrix}
+			10 \\ 101
+		\end{bmatrix}
+		\begin{bmatrix}
+			011 \\ 11
+		\end{bmatrix}
+		\begin{bmatrix}
+			101 \\ 011
+		\end{bmatrix}\]
+		
+		\pause
+		
+		\[\begin{bmatrix}
+			10 \\ 101
+		\end{bmatrix} \pause
+		\begin{bmatrix}
+			101 \\ 011
+		\end{bmatrix}\pause
+		\begin{bmatrix}
+			101 \\ 011
+		\end{bmatrix} ...\]
+	
+	
+Dieses mal offensichtlich ohne Lösung
 }
 
 \frame{
@@ -93,10 +169,36 @@
 	\end{block}
 	
 } \frame {
-	% An dieser Stelle dann die genauen Regeln vorstellen (s. Wegener)
-	% Die wichtigen im Detail (Kopier-Regeln, Zustandsübergangsregeln)
-	% Und die "unwichtigen" nennen
-	
+	\frametitle{Simulationsregeln}
+	\textbf{1. Anfangsregel}
+		\begin{tabbing}
+			\kill
+			$(\sharp, \sharp\sharp q_0w\sharp)$ 
+		\end{tabbing} \pause
+	\textbf{2. Kopierregeln} 
+		\begin{tabbing}
+			LinksNochWeiter \= Rechts \kill
+			$(a, a)$ \> für alle $a \in \Gamma \cup \{\sharp\}$
+		\end{tabbing} \pause	
+	\textbf{3. Überführungsregeln} 
+		\begin{tabbing}
+			LinksNochWeiter \= Rechts \kill
+			$(qa, cq')$ \> falls $qa \rightarrow q'cR$, für $q \in Q, a \in \Gamma$ \\
+			
+			$(bqa, q'bc)$ \> falls $qa \rightarrow q'cL$, für $q \in Q, a \in \Gamma$ 
+		\end{tabbing} \pause	
+	\textbf{4. Aufholregeln}
+		\begin{tabbing}
+			LinksNochWeiter \= Rechts \kill
+			$(aq, q)$ \> für $a \in \Gamma$ und $q \in Q_f$ \\
+			
+			$(qa, q)$ \> für $a \in \Gamma$ und $q \in Q_f$
+		\end{tabbing} \pause
+	\textbf{5. Abschlussregel}
+		\begin{tabbing}
+			LinksNochWeiter \= Rechts \kill
+			$(q\sharp\sharp\sharp, \sharp)$ \> für $q \in Q_f$ 
+		\end{tabbing}
 }
 
 \frame{
