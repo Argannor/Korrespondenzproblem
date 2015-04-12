@@ -157,15 +157,13 @@ Dieses mal offensichtlich ohne Lösung
 	\end{block}
 } \frame {	
 	\begin{block}{Beispiel}
-	Formalisierte Darstellung: $0110101,q_01,0010\sharp01101011,q_10,0010$ \newline
+	Formalisierte Darstellung: $0110101q_010010\sharp01101011q_100010$ \newline
 	Der Lesekopf liest eine $1$ und befindet sich in Zustand $q_0$, die Regel die Anwendung gefunden hat ist $q_01 \rightarrow q_10R$.
 	\end{block}	
 	\pause[2]
-	\begin{block}{Simulation der Regel $q_10 \rightarrow q_11$}
-%	$0110101q_010010\sharp01101011q_100010\sharp\pause[2]0\pause[3]1\pause[4]1\pause[5]0\pause[6]1\pause[7]0\pause[8]1\pause[9]11q_1\pause[10]0\pause[11]010\pause[12]\sharp$\newline
-%	$\pause[1]0110101q_010010\sharp\pause[2]0\pause[3]1\pause[4]1\pause[5]0\pause[6]1\pause[7]0\pause[8]1\pause[9]1q_10\pause[10]0\pause[11]010\pause[12]\sharp$
-	$0110101q_010010\sharp01101011q_100010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]11q_1\pause[11]0\pause[12]010\pause[13]\sharp$\newline
-	$\pause[2]0110101q_010010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1q_10\pause[11]0\pause[12]010\pause[13]\sharp$
+	\begin{block}{Simulation der Regel $q_10 \rightarrow q_11R$}
+	$0110101q_010010\sharp01101011q_100010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1\pause[11]1q_1\pause[12]0\pause[13]010\pause[14]\sharp$\newline
+	$\pause[2]0110101q_010010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1\pause[11]q_10\pause[12]0\pause[13]010\pause[14]\sharp$
 	\end{block}
 	
 } \frame {
@@ -173,7 +171,7 @@ Dieses mal offensichtlich ohne Lösung
 	\textbf{1. Anfangsregel}
 		\begin{tabbing}
 			\kill
-			$(\sharp, \sharp\sharp q_0w\sharp)$ 
+			$(\sharp\sharp q_0w\sharp, \sharp)$ 
 		\end{tabbing} \pause
 	\textbf{2. Kopierregeln} 
 		\begin{tabbing}
@@ -183,22 +181,48 @@ Dieses mal offensichtlich ohne Lösung
 	\textbf{3. Überführungsregeln} 
 		\begin{tabbing}
 			LinksNochWeiter \= Rechts \kill
-			$(qa, cq')$ \> falls $qa \rightarrow q'cR$, für $q \in Q, a \in \Gamma$ \\
+			$(cq', qa)$ \> falls $qa \rightarrow q'cR$, für $q \in Q, a \in \Gamma$ \\
 			
-			$(bqa, q'bc)$ \> falls $qa \rightarrow q'cL$, für $q \in Q, a \in \Gamma$ 
+			$(q'bc, bqa)$ \> falls $qa \rightarrow q'cL$, für $q \in Q, a \in \Gamma$ 
 		\end{tabbing} \pause	
 	\textbf{4. Aufholregeln}
 		\begin{tabbing}
 			LinksNochWeiter \= Rechts \kill
-			$(aq, q)$ \> für $a \in \Gamma$ und $q \in Q_f$ \\
+			$(q, aq)$ \> für $a \in \Gamma$ und $q \in Q_f$ \\
 			
-			$(qa, q)$ \> für $a \in \Gamma$ und $q \in Q_f$
+			$(q, qa)$ \> für $a \in \Gamma$ und $q \in Q_f$
 		\end{tabbing} \pause
 	\textbf{5. Abschlussregel}
 		\begin{tabbing}
 			LinksNochWeiter \= Rechts \kill
-			$(q\sharp\sharp\sharp, \sharp)$ \> für $q \in Q_f$ 
+			$(\sharp, q\sharp\sharp)$ \> für $q \in Q_f$ 
 		\end{tabbing}
+} \frame {
+	\frametitle{Aufhol- und Abschlussregeln}
+	
+		\begin{block}{Aktuelle Situation}
+		Aktueller Zustand der Turingmaschine: $0110101q_f10010$ \newline
+		Die Turingmaschine ist in einem akzeptierenden Zustand $q_f$ angekommen.
+		\end{block}	
+		\pause[2]
+		\begin{block}{Aufholen und Abschließen des PKPs}
+		$0110101q_f10010\sharp\pause[3]0\pause[4]11010\pause[5]q_f\pause[6]1\pause[7]0010\sharp\pause[8]01101q_f10010\sharp\pause[9]0110q_f10010\sharp$\newline
+		$\pause[3]0\pause[4]11010\pause[5]1q_f\pause[6]1\pause[7]0010\sharp\pause[8]011010q_f10010\sharp\pause[9]01101q_f10010\sharp$
+		\end{block}
+
+} \frame {
+	\frametitle{Aufhol- und Abschlussregeln}
+	
+		\begin{block}{Aktuelle Situation}
+		Aktueller Zustand der Turingmaschine: $0110101q_f10010$ \newline
+		Die Turingmaschine ist in einem akzeptierenden Zustand $q_f$ angekommen.
+		\end{block}	
+
+		\begin{block}{Aufholen und Abschließen des PKPs}
+		$0q_f10010\sharp\pause[2]q_f10010\sharp\pause[3]q_f0010\sharp\pause[4]q_f010\sharp\pause[5]q_f10\sharp\pause[6]q_f0\sharp\pause[7]q_f\sharp\pause[8]\sharp$\newline
+		$\pause[2]0q_f10010\sharp\pause[3]q_f10010\sharp\pause[4]q_f0010\sharp\pause[5]q_f010\sharp\pause[6]q_f10\sharp\pause[7]q_f0\sharp\pause[8]q_f\sharp\sharp$
+		\end{block}
+
 }
 
 \frame{
