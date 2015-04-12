@@ -62,7 +62,10 @@
 	Dafür müssen wir zuerst den Rechenweg einer Turingmaschine formalisieren. \newline
 } \frame {
 	\begin{block}{Zustand einer Turingmaschine}
-	% Bild einfügen
+	\begin{center}
+		\includegraphics[width=0.85\linewidth]{./abbildungen/turing-snapshot}
+	\end{center}
+
 	\begin{itemize}
 		\item Linkskontext: $u$
 		\item Interner Zustand: $q$
@@ -71,7 +74,7 @@
 	\end{itemize}
 	Somit lässt sich der Zustand $Q_t$ einer Turingmaschine zum Zeitpunkt $t$ durch die Folge $u_tq_ta_tw_t$ darstellen.
 	\end{block}
-	
+} \frame {		
 	\begin{block}{Rechenweg}
 	Den Rechenweg einer Turingmaschine können wir als die Folge von Zuständen $Q_0, ..., Q_n$ vom Startzeitpunkt $t = 0$ bis zum Endzeitpunkt $t = n$ bei dem die Turingmaschine einen der Endzustände erreicht hat.
 	% Formulierung überarbeiten 
