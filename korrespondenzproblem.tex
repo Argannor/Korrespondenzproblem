@@ -54,21 +54,17 @@
 	Wer findet eine Reihenfolge, so dass unten und oben jeweils die gleiche Folge steht?
 	\newline\newline
 	\pause
-	\[I_1 = (2, 1, 1, 3): \begin{bmatrix}
-			10111 \\ 10
-		\end{bmatrix} \begin{bmatrix}
-				1 \\ 111
-			\end{bmatrix} \begin{bmatrix}
-					1 \\ 111
-				\end{bmatrix} \begin{bmatrix}
-						10 \\ 0
-					\end{bmatrix}
+	\[I_1 = (2, 1, 1, 3): 	\begin{bmatrix}
+								10111 \\ 10
+							\end{bmatrix} \begin{bmatrix}
+								1 \\ 111
+							\end{bmatrix} \begin{bmatrix}
+								1 \\ 111
+							\end{bmatrix} \begin{bmatrix}
+								10 \\ 0
+							\end{bmatrix}
 	\]
-	% Analogie von Dominosteinen verwenden, Bilder inkludieren.
-	
-	% Beispiele, einfach lösbare, und unlösbare
-	% % Zuerst hier anschaulich darstellen was das Korrespondenzproblem ist
-	% % Anschließend die allgemeine Beschreibung des Problems vorstellen
+
 }\frame{
 	\[\begin{bmatrix}
 		001 \\ 0
@@ -247,11 +243,11 @@ Dieses mal offensichtlich ohne Lösung
 	\frametitle{Beweise weiterer Probleme}
 	Seien $G_1$ und $G_2$ zwei kontextfreie Grammatiken, und $L_1 = L(G_1)$ und $L_2 = L(G_2)$ zwei daraus konstruierte kontextfreie Sprachen.
 	
-	\begin{block}{Eindeutigkeit}
+	\begin{block}{Mehrdeutigkeitstest}
 	Ist $G_1$ eindeutig?
 	\end{block}
 	
-	\begin{block}{Gleichheit}
+	\begin{block}{Gleichheitstest}
 	Ist $L_1 = L_2$?
 	\end{block}
 }
@@ -259,7 +255,16 @@ Dieses mal offensichtlich ohne Lösung
 \frame{
 	\frametitle{Mehrdeutigkeitstest}
 	
-	% % Beweis entsprechend führen
+	\begin{block}{Konstruktion}
+		Wir konstruieren eine kontextfreie Grammatik $G_x(V, \Sigma, P, S_x)$ mit $\{x_1, x_2, ..., x_n\} \in \Sigma$ und den zusätzlichen Symbolen $A = \{a_1, a_2, ..., a_k\} \notin \Sigma$ mit den Produktionen $P = \{S_x \rightarrow x_1 S_x a_1, ..., S_x \rightarrow x_n S_x a_n, S_x \rightarrow x_1 a_1, ... S_x \rightarrow x_n a_n\}$
+		Zusätzlich konstruieren wir eine zweite Grammatik $G_y$ analog und eine Grammatik $G$ mit den Produktionsregeln $P = (S \rightarrow S_x, S \rightarrow S_y)$
+	\end{block}
+	\pause
+	$G_x$ und $G_y$ sind offensichtlich eindeutig.
+	
+	$G$ ist dann mehrdeutig, wenn $G_x$ und $G_y$ mindestens ein gemeinsames Wort erzeugen. Dann hat das PKP $x_{i_k}...x_{i_1}a{i_1}...a{i_k} = y_{i_k}...y_{i_1}a{i_1}...a{i_k}$ mindestens eine Lösung mit der Indexfolge $I = {i_1, i_2, ... i_k}$.
+	
+	Somit lässt sich das PKP auf den Mehrdeutigkeitstest reduzieren, und der Mehrdeutigkeitstest ist folglich nicht berechenbar.
 }
 
 \frame{
