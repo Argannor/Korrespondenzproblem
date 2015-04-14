@@ -13,7 +13,7 @@
 \usecolortheme{beaver}
 \uselanguage{ngerman}
 
-\title{Korrespondenzproblem}
+\title{Postsches Korrespondenzproblem}
 %\subtitle{Subtitle}
 \author{Soeren Berken-Mersmann}
 \institute{DHBW Karlsruhe}
@@ -29,8 +29,8 @@
 	\begin{enumerate}
 		\item Postsches Korrespondenzproblem
 		\item Simulation einer Turingmaschine
-		\item Beweis der Nichtberechenbarkeit
-		\item Beweise weiterer Probleme
+		\item Beweis der Nichtberechenbarkeit des PKPs
+		\item Beweise für 2 Probleme der formalen Sprachen
 	\end{enumerate}
 }
 
@@ -150,13 +150,13 @@ Dieses mal offensichtlich ohne Lösung
 	\end{block}
 } \frame {	
 	\begin{block}{Beispiel}
-	Formalisierte Darstellung: $0110101q_010010\sharp01101011q_100010$ \newline
-	Der Lesekopf liest eine $1$ und befindet sich in Zustand $q_0$, die Regel die Anwendung gefunden hat ist $q_01 \rightarrow q_10R$.
+	Formalisierte Darstellung: $0110101q_0100010\sharp01101011q_100010$ \newline
+	Der Lesekopf liest eine $1$ und befindet sich in Zustand $q_0$, die Regel die Anwendung gefunden hat ist $q_01 \rightarrow q_11R$.
 	\end{block}	
 	\pause[2]
 	\begin{block}{Simulation der Regel $q_10 \rightarrow q_11R$}
-	$0110101q_010010\sharp01101011q_100010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1\pause[11]1q_1\pause[12]0\pause[13]010\pause[14]\sharp$\newline
-	$\pause[2]0110101q_010010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1\pause[11]q_10\pause[12]0\pause[13]010\pause[14]\sharp$
+	$0110101q_0100010\sharp01101011q_100010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1\pause[11]1q_1\pause[12]0\pause[13]010\pause[14]\sharp$\newline
+	$\pause[2]0110101q_0100010\sharp\pause[3]0\pause[4]1\pause[5]1\pause[6]0\pause[7]1\pause[8]0\pause[9]1\pause[10]1\pause[11]q_10\pause[12]0\pause[13]010\pause[14]\sharp$
 	\end{block}
 	
 } \frame {
@@ -268,7 +268,9 @@ Dieses mal offensichtlich ohne Lösung
 
 	\begin{itemize}
 		\item $G_x$ und $G_y$ sind offensichtlich eindeutig
-		\item $G$ ist dann mehrdeutig, wenn $G_x$ und $G_y$ mindestens ein gemeinsames Wort erzeugen. Dann hat das PKP $x_{i_k}...x_{i_1}a{i_1}...a{i_k} = y_{i_k}...y_{i_1}a{i_1}...a{i_k}$ mindestens eine Lösung mit der Indexfolge $I = {i_1, i_2, ... i_k}$.
+		\item $L(G_x)$ erzeugt alle Wörter $x_{i_k}...x_{i_1}a_{i_1}...a_{i_k}$ und $L(G_y)$ analog $y_{i_k}...y_{i_1}a_{i_1}...a_{i_k}$.
+		\item $G$ ist dann mehrdeutig, wenn $G_x$ und $G_y$ mindestens ein gemeinsames Wort erzeugen.
+		\item Dann hat das PKP $x_{i_k}...x_{i_1} = y_{i_k}...y_{i_1}$ mindestens eine Lösung mit der Indexfolge $I = {i_1, i_2, ... i_k}$.
 		\item Somit lässt sich das PKP auf den Mehrdeutigkeitstest reduzieren, und der Mehrdeutigkeitstest ist folglich nicht berechenbar.
 	\end{itemize}
 		
@@ -282,7 +284,9 @@ Dieses mal offensichtlich ohne Lösung
 	
 	Ferner lässt sich feststellen, dass $G_x, G_y$ sogar deterministisch kontextfrei sind.\newline
 	
-	Dkf Sprachen sind unter Komplementbildung abgeschlossen.
+	DkfG sind unter Komplementbildung abgeschlossen.\newline
+	
+	kfG sind unter Vereinigung abgeschlossen.
 	
 	
 } \frame {
@@ -297,9 +301,9 @@ Dieses mal offensichtlich ohne Lösung
 										\>$\Leftrightarrow L(G_3) = L(G'_2)$ \\
 										\>$\Leftrightarrow (G_3, G'_2) \in$ Äquivalenzproblem \\
 	\end{tabbing}
-		Mit dem Übergang zur Komplementgrammatik $G_2 \mapsto G'_2$ (dkf) und
+		Mit dem Übergang zur Komplementgrammatik $G_2 \mapsto G'_2$ (für dkfG) und
 		
-		dem Übergang zur Vereinigungsgrammatik $G_1, G'_2 \mapsto G_3$ (kf).
+		dem Übergang zur Vereinigungsgrammatik $G_1, G'_2 \mapsto G_3$ (für kfG).
 	\end{block}
 	
 	
@@ -312,7 +316,6 @@ Dieses mal offensichtlich ohne Lösung
 	\begin{itemize}
 		\item Wegener, Ingo: Theoretische Informatik - eine algorithmenorientierte Einführung. Dritte Auflage. Teubner, 2005. ISBN 3-8351-0033-5
 		\item Schöning, Uwe: Theoretische Informatik - kurz gefasst. Fünfte Auflage. Spektrum Akademischer Verlag, Heidelberg 2008, ISBN 978-3827418241
-		\item Funke, Danile: Präsentation zur Reduzierbarkeit. DHBW Karlsruhe 2009.
 	\end{itemize}
 }
 
