@@ -126,7 +126,7 @@ Dieses mal offensichtlich ohne Lösung
 	
 	% Anwendungszweck? Simulation einer Turingmaschine
 	
-	Um die zu Beweisen, dass das PKP nicht berechenbar ist, werden wir eine Turingmaschine simulieren.\newline
+	Um zu beweisen, dass das PKP nicht berechenbar ist, werden wir eine Turingmaschine simulieren.\newline
 	
 	Dafür müssen wir zuerst den Rechenweg einer Turingmaschine formalisieren. \newline
 } \frame {
@@ -295,13 +295,13 @@ Dieses mal offensichtlich ohne Lösung
 	\begin{tabbing}
 		(G1,G2) in Schnittproblem \= Rechts \kill
 		$(G_1, G_2) \in$ Schnittproblem \>$\Leftrightarrow L(G_1) \cap L(G_2) = \emptyset$ \\
-										\>$\Leftrightarrow L(G_1) \subseteq \overline{L(G_2)}$ \\
-										\>$\Leftrightarrow L(G_1) \subseteq L(G'_2)$ \\
-										\>$\Leftrightarrow L(G_1) \cup L(G'_2) = L(G'_2)$ \\
-										\>$\Leftrightarrow L(G_3) = L(G'_2)$ \\
-										\>$\Leftrightarrow (G_3, G'_2) \in$ Äquivalenzproblem \\
+\pause[2]								\>$\Leftrightarrow L(G_1) \subseteq \overline{L(G_2)}$ \\
+\pause[3]								\>$\Leftrightarrow L(G_1) \subseteq L(G'_2)$ \\
+\pause[4]								\>$\Leftrightarrow L(G_1) \cup L(G'_2) = L(G'_2)$ \\
+\pause[5]								\>$\Leftrightarrow L(G_3) = L(G'_2)$ \\
+\pause[6]								\>$\Leftrightarrow (G_3, G'_2) \in$ Äquivalenzproblem \\
 	\end{tabbing}
-		Mit dem Übergang zur Komplementgrammatik $G_2 \mapsto G'_2$ (für dkfG) und
+\pause[1]		Mit dem Übergang zur Komplementgrammatik $G_2 \mapsto G'_2$ (für dkfG) und
 		
 		dem Übergang zur Vereinigungsgrammatik $G_1, G'_2 \mapsto G_3$ (für kfG).
 	\end{block}
