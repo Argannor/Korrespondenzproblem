@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -151,10 +152,67 @@
 			\end{satz}
 		
 		\paragraph{Simulation mit Hilfe des PKPs}
+			Wir benötigen nun Regeln, um aus dem formalisierten Rechenweg einer Turingmaschine eine Instanz des speziellen PKPs\footnote{Das spezielle PKP hat die Einschränkung, dass das Startwortpaar bereits gegeben ist.} konstruieren zu können. Das Ziel ist es, dass die Instanz des PKPs genau dann eine Lösung hat, wenn die damit simulierte Turingmaschine terminiert. Diese Konstruktionsregeln sehen folgendermaßen aus:
+			\begin{definition}
+				\label{def-simulation}
+				Für eine gegebene Turingmaschine $M = (Q, \Sigma, \varGamma, \delta, q_o, \varepsilon ,Q_f)$ mit der Menge der inneren Zustände $Q$, dem Eingabealphabet $\Sigma$, dem Bandalphabet $\varGamma$, dem (inneren) Startzustand $q_0$, dem leeren Symbol $\varepsilon$ sowie der Menge an (inneren) Finalzuständen $Q_f$ kann mit nachfolgenden Regeln eine Instanz eines PKPs konstruiert werden, so dass dieses genau dann eine Lösung hat, wenn die Turingmaschine für das Eingabewort $w$ in einen Endzustand gelangt.
+				\begin{tabbing}
+					XXXX \= XXXXXXX \= X \kill
+						\textbf{1. Anfangsregel}\\
+							\> \textbullet $\begin{bmatrix}\sharp\sharp q_0w\sharp \\ \sharp\end{bmatrix}$ \> (Startwortpaar)\\
+						\textbf{2. Kopierregel}\\
+							\> \textbullet$\begin{bmatrix} a \\ a \end{bmatrix}$ \> für alle $a \in \varGamma \cup \left\lbrace \sharp \right\rbrace$\\
+						\textbf{3. Überführungsregeln}\\
+							\> \textbullet$\begin{bmatrix} cq' \\ qa \end{bmatrix}$ \> falls $(qa \rightarrow q'cR) \in \delta$, für $q \in Q, a \in \varGamma$ \\
+							\> \textbullet$\begin{bmatrix} q'bc \\ bqa \end{bmatrix}$ \> falls $(qa \rightarrow q'cL) \in \delta$, für $q \in Q, a \in \varGamma$\\
+						\textbf{4. Aufholregeln}\\
+							\> \textbullet$\begin{bmatrix} q \\ aq \end{bmatrix}$ \> für alle $a \in \varGamma$ und $q \in Q_f$\\
+							\> \textbullet$\begin{bmatrix} q \\ qa \end{bmatrix}$ \> für alle $a \in \varGamma$ und $q \in Q_f$\\
+						\textbf{5. Abschlussregel}\\
+							\> \textbullet$\begin{bmatrix} \sharp \\ q\sharp\sharp\end{bmatrix}$ \> für alle $q \in Q_f$
+
+				\end{tabbing} 
+			\end{definition}
+			Anmerkung: Die hiermit simulierte Turingmaschine bewegt ihren Lese- und Schreibkopf in jedem Rechenschritt entweder nach Rechts oder nach Links. Der Übersichtlichkeit halber wurden zusätzliche Regeln die für den Fall benötigt werden, dass der Kopf den Rand des beschriebenen Teils erreicht, weggelassen. Diese können in WEGENER EINFÜGEN nachgelesen werden.
 			
+			Die Simulation des Rechenwegs der Turingmaschine kann man sich folgendermaßen visualisieren: Man hat zwei übereinander stehende Wortfolgen, bei der das untere Wort jeweils die bereits abgeschlossenen Rechenschritte darstellt, und das obere entsprechend zusätzlich den darauf folgenden Rechenschritt abbildet. So eilt das untere Band dem oberen Band so lange hinterher, bis die Aufholregeln eingesetzt werden können, sprich die Turingmaschine einen Finalzustand erreicht hat. Diese Aufholregeln ermöglichen es nun dem unteren Wort Schritt für Schritt aufzuholen, bis nur noch das - aus der Abschlussregel konstruierte - Wortpaar verwendet werden kann, und es das obere Wort einholt. Damit hat diese PKP Instanz genau dann eine Lösung wenn die Turingmaschine einen Finalzustand erreicht. Die Konstruktionsregeln aus Definition \ref{def-simulation} lassen nur unter dieser Bedingung ein Aufholen des unteren Wortes zu.
 			
+			Das folgende Beispiel dient der Verdeutlichung des Simulationsablaufs:
+			\begin{bsp}
+				Gegeben sei eine Turingmaschine $M$, die sich derzeit im Zustand $Q_t = 0110101q_2100010$ befindet. Durch die Anwendung der Regel $q_21 \rightarrow q_11R$ gelangt sie in den Folgezustand $Q_{t+1} = 01101011q_100010$. Der darauf folgende Rechenschritt soll nun mit Hilfe des nach Definition \ref{def-simulation} konstruierten PKPs simuliert werden. Dabei findet folgende Regel Anwendung: $q_10\rightarrow q_11R$
+				\begin{tabbing}
+				XXXX \= XX \= X\kill
+				\>\textbullet Ausgangslage\\
+				\>\> $...0110101q_2100010\sharp01101011q_100010\sharp$\\
+				\>\> $...0110101q_2100010\sharp$\\
+				\>\textbullet Anwendung der Kopierregel\\
+				\>\> $...0110101q_2100010\sharp01101011q_100010\sharp0$\\
+				\>\>$ ...0110101q_2100010\sharp0$\\
+				\>\textbullet Anwendung der Kopierregel\\
+				\>\> $...0110101q_2100010\sharp01101011q_100010\sharp01$\\
+				\>\>$ ...0110101q_2100010\sharp01$\\
+				\>\textbullet Mehrfache Anwendung der Kopierregeln\\
+				\>\> $...0110101q_2100010\sharp01101011q_100010\sharp01101011$\\
+				\>\>$ ...0110101q_2100010\sharp01101011$\\
+				\>\textbullet Überführungsregel zu $q_10\rightarrow q_11R$\\
+				\>\> $...0110101q_2100010\sharp01101011q_100010\sharp011010111q_1$\\
+				\>\>$ ...0110101q_2100010\sharp01101011q_10$\\
+				\>\textbullet Erneute Mehrfache Anwendung der Kopierregeln\\
+				\>\> $...0110101q_2100010\sharp01101011q_100010\sharp011010111q_10010\sharp$\\
+				\>\>$ ...0110101q_2100010\sharp01101011q_100010\sharp$\\
+				\end{tabbing}
+				Somit erhalten wir den nachfolgenden Turingrechenschritt durch obenstehende Simulation mit $Q_{t+2} = 011010111q_10010$.
+			\end{bsp}
 
 	\subsection{Reduktion des Halteproblems}
+	
+		Wie bereits im vorangegangen Abschnitt beschrieben, hat die nach Definition \ref{def-simulation} konstruierte Instanz des Postschen Korrespondenzproblems nur dann eine Lösung, wenn die Turingmaschine $M$ mit der Eingabe $w$ einen Finalzustand erreicht, sprich terminiert. Das Halteproblem für Turingmaschinen besagt allerdings, dass es nicht entscheidbar ist, ob eine Turingmaschine für eine beliebige Eingabe terminiert. Damit ist das PKP ebenfalls nicht entscheidbar.
+		
+		\begin{satz}
+		Sei $M$ eine Turingmaschine und $w$ ihre Eingabe, so lässt sich das Halteproblem für Turingmaschinen durch die Übergangsfunktion $f$ (nach Definition \ref{def-simulation}) auf das PKP reduzieren:
+		\[X_{Halte} (M, w) \Leftrightarrow X_{PKP}(f(M, w))\]
+		Damit ist bewiesen, dass das PKP ebenfalls nicht berechenbar ist.
+		\end{satz}
 
 \section{Beweise mit Hilfe des PKPs}
 
