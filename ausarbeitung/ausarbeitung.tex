@@ -210,13 +210,44 @@
 		
 		\begin{satz}
 		Sei $M$ eine Turingmaschine und $w$ ihre Eingabe, so lässt sich das Halteproblem für Turingmaschinen durch die Übergangsfunktion $f$ (nach Definition \ref{def-simulation}) auf das PKP reduzieren:
-		\[X_{Halte} (M, w) \Leftrightarrow X_{PKP}(f(M, w))\]
+		\[\chi_{Halte} (M, w) \Leftrightarrow \chi_{PKP}(f(M, w))\]
 		Damit ist bewiesen, dass das PKP ebenfalls nicht berechenbar ist.
 		\end{satz}
 
 \section{Beweise mit Hilfe des PKPs}
 
-	\subsection{Eindeutigkeitsfrage}
+	In diesem Kapitel soll mit Hilfe des PKPs die Nichtberechenbarkeit zweier weiterer Probleme aus dem Gebiet der formalen Sprachen bewiesen werden. Konkret geht es um den Mehrdeutigkeitstest für eine kontextfreie Grammatik und die Frage nach der Äquivalenz zweier kontextfreier Sprachen.
+	
+	\subsection{Mehrdeutigkeitstest}
+		
+		Der Mehrdeutigkeitstest sei wie folgt definiert:
+		\begin{definition}
+			Eine kontextfreie Grammatik ist genau dann Mehrdeutig, wenn sich mindestens ein Wort auf mindestens zwei verschiedene Weise aus dieser ableiten lassen. Somit sei die charakteristische Funktion $\chi_{Mehrdeutig}(G)$ definiert als
+			  \[
+			     \chi_{Mehrdeutig}(G)=\left\{\begin{array}{ll} 1, & \text{G ist mehrdeutig} \\
+			         0, &\text{G ist eindeutig}\end{array}\right. .
+			  \]
+		\end{definition}
+		
+		Zu einer gegebenen Instanz des PKPs mit $K = \left\lbrace (x1, y_1), ..., (x_k, y_k) \right\rbrace$ über dem endlichen Alphabet $\Sigma$ und den zusätzlichen Symbolen $I = \{a_1, ..., a_k\} \notin \Sigma$ konstruieren wir uns zunächst zwei kontextfreie Grammatiken die offensichtlich eindeutig sind:
+		\newline\newline
+		$G_x = (\{S_x\}, T, P_x, S_x)$ mit $T = \Sigma \cup I$ und $P_x = \{S_x \rightarrow x_1 S_x a_1 | ... | x_n S_x a_n | x_1 a_1 | ... | x_n a_n\}$.\\ \\
+		Analog dazu konstruieren wir eine zweite Grammatik $G_y$. Sowie eine dritte Grammatik $G$ mit \newline\newline
+		$G = (\{S, S_x, S_y\}, T, P, S)$, mit $P = (S \rightarrow S_x | S_y) \cup P_x \cup P_y$.
+		
+		Es lassen sich folgende Beobachtungen machen:
+		\begin{itemize}
+		\item Wie bereits festgestellt sind $G_x$ und $G_y$ offensichtlich eindeutig
+		\item Die Grammatiken $G_x$ und $G_y$ erzeugen alle Wörter der Form $x_{i_k}...x_{i_1}a_{i_1}...a_{i_k}$ und $y_{i_k}...y_{i_1}a_{i_1}...a_{i_k}$.
+		\item $G$ ist genau dann mehrdeutig, wenn $G_x$ und $G_y$ mindestens ein gemeinsames Wort erzeugen.
+		\item Wenn $G$ mehrdeutig ist, dann hat das PKP folglich mindestens eine Lösung $x_{i_k}...x_{i_1} = y_{i_k}...y_{i_1}$ mit der Indexfolge $I = {i_1, i_2, ... i_k}$.
+		\end{itemize}
+		
+		\begin{satz}
+		Aus den oben gemachten Beobachtungen folgt, dass der Mehrdeutigkeitstest für eine kontextfreie Grammatik $G$ nicht berechenbar ist. Die Reduktionsfunktion ist die oben dargestellte Konstruktion der drei Grammatiken zu einer gegebenen Instanz $K$ des PKPs. Somit gilt:
+		\[\chi_{PKP} (K) \Leftrightarrow \chi_{Mehrdeutig}(G)\]
+		\end{satz}
+		
 
 	\subsection{Äquivalenzproblem}
 
