@@ -39,9 +39,9 @@
 
 \section{Einleitung}
 
-	Diese Ausarbeitung soll mit Hilfe des Postschen Korrespondenzproblems zeigen, dass es einfacher sein kann einem Problem eine Eigenschaft nachzuweisen in dem ein Zwischenschritt über ein anderes Problem gemacht wird. Konkret soll die Nichtberechenbarkeit für zwei Probleme von kontextfreien Grammatiken bewiesen werden: Der Mehrdeutigkeitstest und das Äquivalenzproblem.
+	Diese Ausarbeitung soll mit Hilfe des Postschen Korrespondenzproblems zeigen, dass es einfacher sein kann einem Problem eine Eigenschaft nachzuweisen in dem ein Zwischenschritt über ein anderes Problem gemacht wird. Konkret soll dieses Verfahren für die Nichtberechenbarkeit zweier Probleme der kontextfreien Grammatiken bewiesen werden: Der Mehrdeutigkeitstest und das Äquivalenzproblem.
 	
-	Hierbei wird zuerst das Postsche Korrespondenzproblem vorgestellt und erläutert. Anschließend wird das Halteproblem für Turingmaschinen hierauf reduziert um im Abschluss das PKP auf die oben genannten Probleme zu reduzieren und damit deren Nichtberechenbarkeit zu beweisen.
+	Hierbei wird zuerst das Postsche Korrespondenzproblem (PKP) vorgestellt und erläutert. Anschließend wird das Halteproblem für Turingmaschinen darauf reduziert um im Abschluss das PKP auf die oben genannten Probleme zu reduzieren um deren Nichtberechenbarkeit zu beweisen.
 
 \section{Postsches Korrespondenzproblem}
 
@@ -50,12 +50,12 @@
 		Das Postsches Korrespondenzproblem (PKP) ist benannt nach Emil Leon Post. Es handelt sich um ein konstruiertes Problem aus der theoretischen Informatik und ist folgendermaßen definiert (vgl. \cite{wegener}):
 		
 		\begin{definition}
-			Gegeben sei eine endliche Menge an Wortpaaren $K = ((x_1, y_1), ..., (x_k, y_k))$, über dem Alphabet $\Sigma$ mit $x_i, y_i \in \Sigma$. Gibt es eine Folge von Indizes $i_1, i_2, ..., i_n \in {1, 2, ..., k}, n \geq 1$, so dass $x_{i_1},x_{i_2}, ... x_{i_n} = y_{i_1}, y_{i_2}, ..., y_{i_n}$?
+			Gegeben sei eine endliche Menge an Wortpaaren $K = \left\lbrace (x_1, y_1), ..., (x_k, y_k)\right\rbrace $, über dem Alphabet $\Sigma$ mit $x_i, y_i \in \Sigma$. Gibt es eine Folge von Indizes $i_1, i_2, ..., i_n \in \{1, 2, ..., k\}, n \geq 1$, so dass $x_{i_1},x_{i_2}, ... x_{i_n} = y_{i_1}, y_{i_2}, ..., y_{i_n}$ gilt?
 		\end{definition}
 		
 		Das Problem lässt sich besser Visualisieren als Menge von Dominosteinen: Ein Dominostein besteht jeweils aus einem oberen ($x_i$) und unteren ($y_i$) Symbol aus dem Alphabet $\Sigma$. Die Fragestellung lautet nun, ob es eine Reihenfolge gibt in der die Dominosteine so aneinandergereiht werden können, dass oben und unten die selbe Symbolfolge entsteht. Dabei darf jeder Dominostein mehrfach verwendet werden. Diese Arbeit wird daher eine Schreibweise verwenden, die diese Visualisierung widerspiegelt.
 	
-	\subsection{Beispielinstanzen}
+	\subsection{Beispiele des PKPs}
 		
 		Dieser Abschnitt wird an Hand von drei Beispielen zeigen, dass die Lösung des PKPs nicht trivial ist.
 
@@ -82,7 +82,7 @@
 							\end{bmatrix}\]
 		\end{bsp}
 		
-		Das Beispiel \ref{bsp-pkp1} zeigt, dass es Instanzen des PKPs gibt für die sich eine Lösung finden lässt. Darüber hinaus handelt es sich um ein einfaches Beispiel, bei dem man mit ein wenig Knobelei selbst auf die Lösung kommen kann. Mit Hilfe von zwei weiteren Beispielen wird gezeigt, dass es sowohl weitaus komplexere Probleminstanzen gibt, die sich nicht mehr mit einem scharfen Blick lösen lassen (s. Beispiel \ref{bsp-pkp2}), als auch Fälle in denen es keine Lösung für das PKP gibt (Beispiel \ref{bsp-pkp3}).
+		Das Beispiel \ref{bsp-pkp1} zeigt, dass es Instanzen des PKPs gibt für die sich eine Lösung finden lässt. Darüber hinaus handelt es sich um ein einfaches Beispiel, bei dem man mit ein wenig Knobelei selbst auf die Lösung kommen kann. Mit Hilfe der zwei nächsten Beispielen wird gezeigt, dass es sowohl weitaus komplexere Probleminstanzen gibt, die sich nicht mehr mit einem scharfen Blick lösen lassen (s. Beispiel \ref{bsp-pkp2}), als auch Fälle in denen es keine Lösung für das PKP gibt (Beispiel \ref{bsp-pkp3}).
 		
 		\begin{bsp}
 			\label{bsp-pkp2}
@@ -132,14 +132,14 @@
 		\end{bsp}
 
 \section{Beweis der Nichtberechenbarkeit}
-	In diesem Kapitel soll die Nichtentscheidbarkeit des PKPs bewiesen werden. Dazu wird das Halteproblem für Turingmaschinen zu Hilfe genommen.
+	In diesem Kapitel soll die Nichtentscheidbarkeit des PKPs bewiesen werden, indem das Halteproblem für Turingmaschinen auf das PKP reduziert wird.
 
 	\subsection{Simulation einer Turingmaschine}
-		Dazu soll zuerst gezeigt werden, wie mit Hilfe des PKPs eine Turingmaschine simuliert werden kann. Dabei wird eine Turingmaschine mit einem beidseitig unendlichem Band und dem Bandalphabet $\varGamma = {0,1}$ verwendet, ohne die Allgemeinheit zu beschränken. Um die Turingmaschine mit Hilfe des PKPs simulieren zu können, muss zuerst ihr Rechenweg formalisiert werden. 
+		Dazu soll zuerst gezeigt werden, wie mit Hilfe des PKPs eine Turingmaschine simuliert werden kann. Dabei wird eine Turingmaschine mit einem beidseitig unendlichem Band und dem Bandalphabet $\varGamma = \{0,1\}$ verwendet, ohne Beschränkung der Allgemeinheit. Um die Turingmaschine mit Hilfe des PKPs simulieren zu können, muss zuerst ihr Rechenweg formalisiert werden. 
 		
 		
 		\paragraph{Der Rechenweg einer Turingmaschine}
-			Der Rechenweg beschreibt dabei die von der Turingmaschine durchlaufenen Zustände\footnote{Mit Zuständen wird der gesamte Zustand der Turingmaschine gemeint, und nicht der Zustand des Turingprogramms. Der Verständlichkeit halber wird dieser Programmzustand im weiteren als interner Zustand bezeichnet.} vom Beginn der Berechnung bis zu einem (möglichen) Endzustand. Der Rechenweg ist folglich eine Folge von Zuständen.
+			Der Rechenweg beschreibt dabei die von der Turingmaschine durchlaufenen Zustände\footnote{Mit Zuständen wird der gesamte Zustand der Turingmaschine gemeint, und nicht der Zustand des Turingprogramms. Der Verständlichkeit halber wird dieser Programmzustand im Weiteren als interner Zustand bezeichnet.} vom Beginn der Berechnung bis zu einem (möglichen) Endzustand. Der Rechenweg ist folglich eine Folge von Zuständen.
 			
 			Der Zustand einer Turingmaschine lässt sich mit den folgenden Punkten vollständig beschreiben (Vgl. Abbildung \ref{img-turingsnapshot}):
 			\begin{figure}
@@ -157,19 +157,28 @@
 				\item Position des Lese- und Schreibkopfes
 			\end{itemize}
 			
-			\begin{satz}
-			Somit lässt sich der Zustand $Q_t$ einer Turingmaschine zum Zeitpunkt $t$ durch die Folge $Q_t = u_tq_ta_tw_t$ darstellen. Dabei ist die Position des Lese- und Schreibkopfes durch die Position des internen Zustands innerhalb der Folge $Q_t$ kodiert. Folglich lassen sich das gelesene Symbol $a_t$ und der Rechtskontext $w_t$ auch zusammenfassen.
-			\end{satz}
+			Das führt zu Satz \ref{satz-Turing-Zustand}:
 			
 			\begin{satz}
-			Den Rechenweg einer Turingmaschine können wir als die Folge von Zuständen $Q_0, ..., Q_n$ vom Startzeitpunkt $t = 0$ bis zum Endzeitpunkt $t = n$ bei dem die Turingmaschine einen der Endzustände erreicht hat.
+			\label{satz-Turing-Zustand}
+			Der Zustand $Q_t$ einer Turingmaschine zum Zeitpunkt $t$ kann durch die Folge $Q_t = u_tq_ta_tw_t$ dargestellt werden. Dabei ist die Position des Lese- und Schreibkopfes durch die Position des internen Zustands innerhalb der Folge $Q_t$ kodiert. Folglich lassen sich das gelesene Symbol $a_t$ und der Rechtskontext $w_t$ auch zusammenfassen.
+			\end{satz}
+			
+			Und mit Hilfe dieses Satzes kann der Rechenweg der Turingmaschine beschrieben werden:
+			
+			\begin{satz}
+			Den Rechenweg einer Turingmaschine kann als Folge von Zuständen $Q_0, ..., Q_n$ vom Startzeitpunkt $t = 0$ bis zum Endzeitpunkt $t = n$ bei dem die Turingmaschine einen der Endzustände erreicht hat dargestellt werden.
 			\end{satz}
 		
 		\paragraph{Simulation mit Hilfe des PKPs}
-			Wir benötigen nun Regeln, um aus dem formalisierten Rechenweg einer Turingmaschine eine Instanz des speziellen PKPs\footnote{Das spezielle PKP hat die Einschränkung, dass das Startwortpaar bereits gegeben ist.} konstruieren zu können. Das Ziel ist es, dass die Instanz des PKPs genau dann eine Lösung hat, wenn die damit simulierte Turingmaschine terminiert. Diese Konstruktionsregeln sehen folgendermaßen aus (vgl. \cite{wegener}):
+			Wir benötigen nun Regeln, um aus dem formalisierten Rechenweg einer Turingmaschine eine Instanz des speziellen PKPs\footnote{Das spezielle PKP hat die Einschränkung, dass das Startwortpaar bereits gegeben ist.} konstruieren zu können. Das Ziel ist es, dass die Instanz des PKPs genau dann eine Lösung hat, wenn die damit simulierte Turingmaschine terminiert. Folglich spiegelt die Wortfolge des PKPs den Rechenweg der Turingmaschine wider.
+			
+			Die drei Kernkomponenten sind die Kopierregeln, mit denen die unveränderten Teile des Zustands (sprich der Links und der Rechtskontext) jeweils in den Folgezustand kopiert werden. Die Überführungsregeln, die die Zustandsübergangsfunktionen der Turingmaschine abbilden. Sowie die Aufholregeln die es dem PKP ermöglichen zu einer Lösung zu gelangen wenn die Turingmaschine einen Finalzustand erreicht hat. Darüber hinaus werden noch die Anfangs- und Abschlussregeln gebraucht um das PKP auf den Ausgangszustand der Turingmaschine zu initialisieren und die Lösung des PKPs zu bilden.
+			
+			Diese Konstruktionsregeln sehen folgendermaßen aus (vgl. \cite{wegener}):
 			\begin{definition}
 				\label{def-simulation}
-				Für eine gegebene Turingmaschine $M = (Q, \Sigma, \varGamma, \delta, q_o, \varepsilon ,Q_f)$ mit der Menge der inneren Zustände $Q$, dem Eingabealphabet $\Sigma$, dem Bandalphabet $\varGamma$, dem (inneren) Startzustand $q_0$, dem leeren Symbol $\varepsilon$ sowie der Menge an (inneren) Finalzuständen $Q_f$ kann mit nachfolgenden Regeln eine Instanz eines PKPs konstruiert werden, so dass dieses genau dann eine Lösung hat, wenn die Turingmaschine für das Eingabewort $w$ in einen Endzustand gelangt.
+				Für eine gegebene Turingmaschine $M = (Q, \Sigma, \varGamma, \delta, q_o, \varepsilon ,Q_f)$ mit der Menge der inneren Zustände $Q$, dem Eingabealphabet $\Sigma$, dem Bandalphabet $\varGamma$, dem (inneren) Startzustand $q_0$, dem leeren Symbol $\varepsilon$, sowie der Menge an (inneren) Finalzuständen $Q_f$ kann mit nachfolgenden Regeln eine Instanz des PKPs konstruiert werden, so dass dieses genau dann eine Lösung hat, wenn die Turingmaschine für das Eingabewort $w$ in einen Endzustand gelangt.
 				\begin{tabbing}
 					XXXX \= XXXXXXX \= X \kill
 						\textbf{1. Anfangsregel}\\
@@ -187,9 +196,9 @@
 
 				\end{tabbing} 
 			\end{definition}
-			Anmerkung: Die hiermit simulierte Turingmaschine bewegt ihren Lese- und Schreibkopf in jedem Rechenschritt entweder nach Rechts oder nach Links. Der Übersichtlichkeit halber wurden zusätzliche Regeln die für den Fall benötigt werden, dass der Kopf den Rand des beschriebenen Teils erreicht, weggelassen. Diese können in \cite{wegener} nachgelesen werden.
+			Anmerkung: Die hiermit simulierte Turingmaschine bewegt ihren Lese- und Schreibkopf in jedem Rechenschritt entweder nach Rechts oder nach Links. Zusätzliche Regeln, die benötigt werden wenn der Lese- und Schreibkopf den Rand des beschriebenen Teils des Bands erreicht, wurden der Übersichtlichkeit wegen weggelassen. Diese können in \cite{wegener} nachgelesen werden.
 			
-			Die Simulation des Rechenwegs der Turingmaschine kann man sich folgendermaßen visualisieren: Man hat zwei übereinander stehende Wortfolgen, bei der das untere Wort jeweils die bereits abgeschlossenen Rechenschritte darstellt, und das obere entsprechend zusätzlich den darauf folgenden Rechenschritt abbildet. So eilt das untere Band dem oberen Band so lange hinterher, bis die Aufholregeln eingesetzt werden können, sprich die Turingmaschine einen Finalzustand erreicht hat. Diese Aufholregeln ermöglichen es nun dem unteren Wort Schritt für Schritt aufzuholen, bis nur noch das - aus der Abschlussregel konstruierte - Wortpaar verwendet werden kann, und es das obere Wort einholt. Damit hat diese PKP Instanz genau dann eine Lösung wenn die Turingmaschine einen Finalzustand erreicht. Die Konstruktionsregeln aus Definition \ref{def-simulation} lassen nur unter dieser Bedingung ein Aufholen des unteren Wortes zu.
+			Die Simulation des Rechenwegs der Turingmaschine kann man sich folgendermaßen visualisieren: Man hat zwei übereinander stehende Wortfolgen, bei der das untere Wort jeweils die bereits abgeschlossenen Rechenschritte darstellt, und das obere entsprechend zusätzlich den darauf folgenden Rechenschritt abbildet. So eilt das untere Wort dem oberen Wort so lange hinterher, bis die Aufholregeln eingesetzt werden können, sprich die Turingmaschine einen Finalzustand erreicht hat. Diese Aufholregeln ermöglichen es nun dem unteren Wort Schritt für Schritt aufzuholen, bis nur noch das - aus der Abschlussregel konstruierte - Wortpaar verwendet werden kann, und es das obere Wort einholt. Damit hat diese PKP Instanz genau dann eine Lösung wenn die Turingmaschine einen Finalzustand erreicht. Die Konstruktionsregeln aus Definition \ref{def-simulation} lassen nur unter dieser Bedingung ein Aufholen des unteren Wortes zu.
 			
 			Das folgende Beispiel dient der Verdeutlichung des Simulationsablaufs:
 			\begin{bsp}
@@ -230,7 +239,7 @@
 
 \section{Beweise mit Hilfe des PKPs}
 
-	In diesem Kapitel soll mit Hilfe des PKPs die Nichtberechenbarkeit zweier weiterer Probleme aus dem Gebiet der formalen Sprachen bewiesen werden. Konkret geht es um den Mehrdeutigkeitstest für eine kontextfreie Grammatik und die Frage nach der Äquivalenz zweier kontextfreier Sprachen.
+	In diesem Kapitel soll mit Hilfe des PKPs die Nichtberechenbarkeit zweier weiterer Probleme aus dem Gebiet der formalen Sprachen bewiesen werden. Konkret geht es um den Mehrdeutigkeitstest für eine kontextfreie Grammatik (kfG) und die Frage nach der Äquivalenz zweier kontextfreier Sprachen.
 	
 	\subsection{Mehrdeutigkeitstest}
 	\label{subsec-mehrdeutigkeit}
@@ -244,15 +253,15 @@
 			  \]
 		\end{definition}
 		
-		Zu einer gegebenen Instanz des PKPs mit $K = \left\lbrace (x1, y_1), ..., (x_k, y_k) \right\rbrace$ über dem endlichen Alphabet $\Sigma$ und den zusätzlichen Symbolen $I = \{a_1, ..., a_k\} \notin \Sigma$ konstruieren wir uns zunächst zwei kontextfreie Grammatiken die offensichtlich eindeutig sind:
+		Um das PKP auf den Mehrdeutigkeitstest zu reduzieren konstruieren wir zu einer gegebenen Instanz des PKPs mit $K = \left\lbrace (x1, y_1), ..., (x_k, y_k) \right\rbrace$ über dem endlichen Alphabet $\Sigma$ und den zusätzlichen Symbolen $I = \{a_1, ..., a_k\} \notin \Sigma$ zunächst zwei kontextfreie Grammatiken die offensichtlich eindeutig sind:
 		\newline\newline
 		$G_x = (\{S_x\}, T, P_x, S_x)$ mit $T = \Sigma \cup I$ und $P_x = \{S_x \rightarrow x_1 S_x a_1 | ... | x_n S_x a_n | x_1 a_1 | ... | x_n a_n\}$.\\ \\
 		Analog dazu konstruieren wir eine zweite Grammatik $G_y$. Sowie eine dritte Grammatik $G$ mit \newline\newline
-		$G = (\{S, S_x, S_y\}, T, P, S)$, mit $P = (S \rightarrow S_x | S_y) \cup P_x \cup P_y$.
+		$G = (\{S, S_x, S_y\}, T, P, S)$, mit $P = (S \rightarrow S_x | S_y) \cup P_x \cup P_y$.\\
 		
 		Es lassen sich folgende Beobachtungen machen:
 		\begin{itemize}
-		\item Wie bereits festgestellt sind $G_x$ und $G_y$ offensichtlich eindeutig
+		\item Wie bereits festgestellt sind $G_x$ und $G_y$ offensichtlich eindeutig.
 		\item Die Grammatiken $G_x$ und $G_y$ erzeugen alle Wörter der Form $x_{i_k}...x_{i_1}a_{i_1}...a_{i_k}$ und $y_{i_k}...y_{i_1}a_{i_1}...a_{i_k}$.
 		\item $G$ ist genau dann mehrdeutig, wenn $G_x$ und $G_y$ mindestens ein gemeinsames Wort erzeugen.
 		\item Wenn $G$ mehrdeutig ist, dann hat das PKP folglich mindestens eine Lösung $x_{i_k}...x_{i_1} = y_{i_k}...y_{i_1}$ mit der Indexfolge $I = {i_1, i_2, ... i_k}$.
@@ -260,7 +269,8 @@
 		
 		\begin{satz}
 		Aus den oben gemachten Beobachtungen folgt, dass der Mehrdeutigkeitstest für eine kontextfreie Grammatik $G$ nicht berechenbar ist. Die Reduktionsfunktion ist die oben dargestellte Konstruktion der drei Grammatiken zu einer gegebenen Instanz $K$ des PKPs. Somit gilt:
-		\[\chi_{PKP} (K) \Leftrightarrow \chi_{Mehrdeutig}(G)\]
+		\[\chi_{PKP} (K) \Leftrightarrow \chi_{Mehrdeutig}(f(K))\]
+		Mit der oben beschriebenen Übergangsfunktion $f: K \mapsto G$.
 		\end{satz}
 		
 
@@ -276,11 +286,11 @@
 			\]
 		\end{definition}
 		
-		Um zu beweisen, dass das Äquivalenzproblem ebenfalls nicht berechenbar ist, verwenden wir die Grammatiken $G_x$ und $G_y$ aus Abschnitt \ref{subsec-mehrdeutigkeit}. Der Beweis für das Mehrdeutigkeitsproblem hat auch bereits bewiesen, dass das Schnittproblem ($L(G_x) \cap L(G_y) = \emptyset$) nicht berechenbar ist, da hierdurch direkt gezeigt werden könnte, dass die Vereinigung beider Grammatiken eindeutig ist. Ferner lässt sich feststellen, dass beide Grammatiken sogar deterministisch kontextfrei\footnote{Deterministisch kontextfreie Grammatiken bilden eine Teilmenge der kontextfreien Grammatiken und zeichnen sich dadurch aus, dass diese von einem deterministischen Kellerautomaten akzeptiert werden können.} sind. Daher können wir uns die Eigenschaft zu nutze machen, dass det. kfGs unter der Komplementbildung abgeschlossen sind\footnote{Hierzu müssen beim akzeptierenden Kellerautomaten nur die Finalzustandsmengen komplementiert werden.}. Des weiteren sind kfGs - wie bereits in Abschnitt \ref{subsec-mehrdeutigkeit} gezeigt - unter der Vereinigung abgeschlossen.
+		Um zu beweisen, dass das Äquivalenzproblem ebenfalls nicht berechenbar ist, verwenden wir die Grammatiken $G_x$ und $G_y$ aus Abschnitt \ref{subsec-mehrdeutigkeit}. Der Beweis für das Mehrdeutigkeitsproblem hat auch bereits bewiesen, dass das Schnittproblem ($L(G_x) \cap L(G_y) = \emptyset$) nicht berechenbar ist, da hierdurch direkt gezeigt werden könnte, dass die Vereinigung beider Grammatiken eindeutig ist. Ferner lässt sich feststellen, dass beide Grammatiken sogar deterministisch kontextfrei\footnote{Deterministisch kontextfreie Grammatiken bilden eine Teilmenge der kontextfreien Grammatiken und zeichnen sich dadurch aus, dass diese von einem deterministischen Kellerautomaten akzeptiert werden können.} sind. Daher können wir uns die Eigenschaft zu nutze machen, dass det. kfGs unter der Komplementbildung abgeschlossen sind\footnote{Hierzu müssen beim akzeptierenden Kellerautomaten nur die Finalzustandsmengen komplementiert werden.}. Des Weiteren sind kfGs - wie bereits in Abschnitt \ref{subsec-mehrdeutigkeit} gezeigt - unter der Vereinigung abgeschlossen.
 
 		\begin{satz}
 		\label{satz-aequivalenz}
-			Durch die folgenden Äquivalenzumformungen lässt sich das Schnittproblem det. kfG auf das Äquivalenzproblem kfG reduzieren:
+			Durch die folgenden Äquivalenzumformungen lässt sich das Schnittproblem det. kfG auf das Äquivalenzproblem kfG reduzieren. Dabei seien $G_1$ und $G_2$ det. kfG:
 			
 			\begin{tabbing}
 				(G1,G2) in Schnittproblem \= Rechts \kill
@@ -293,18 +303,18 @@
 			\end{tabbing}
 				Mit dem Übergang zur Komplementgrammatik $G_2 \mapsto G'_2$ (für dkfG) und\\				
 				dem Übergang zur Vereinigungsgrammatik $G_1, G'_2 \mapsto G_3$ (für kfG).
-			Folglich gilt:
+			Folglich gilt (unter Zuhilfenahme der jeweiligen vorgestellten Übergangsfunktionen):
 			\[
 				\chi_{PKP}(K) \Leftrightarrow \chi_{Mehrdeutig}(G) \Leftrightarrow \chi_{Schnitt}(G_x, G_y) \Leftrightarrow \chi_{"Aquivalenz}(G_3, G'_2)
 			\]
-			Damit ist bewiesen, dass das Äquivalenzproblem kfG ebenfalls nicht berechenbar ist \cite{schoening}.
+			Womit bewiesen ist, dass das Äquivalenzproblem kontextfreier Grammatiken ebenfalls nicht berechenbar ist \cite{schoening}.
 		\end{satz}
 
-		An dieser Stelle sei noch angemerkt, dass sämtliche Zwischenschritte der Umformung in Satz \ref{satz-aequivalenz} selbstverständlich ebenfalls nicht berechenbar sind. Wichtig ist auch, dass dieser Beweis ausschließlich für die jeweiligen Mengen von Grammatiken gilt. Beispielsweise ist noch nicht bewiesen, ob es sich beim Äquivalenzproblem zweier det. kfG ebenfalls um ein nichtberechenbares Problem handelt (\cite{schoening}).
+		An dieser Stelle sei noch angemerkt, dass sämtliche Zwischenergebnisse (oder Probleme) der Umformung in Satz \ref{satz-aequivalenz} selbstverständlich ebenfalls nicht berechenbar sind. Wichtig ist auch, dass dieser Beweis ausschließlich für die jeweiligen Mengen von Grammatiken gilt. Beispielsweise ist noch nicht bewiesen, ob es sich beim Äquivalenzproblem zweier det. kfG ebenfalls um ein nichtberechenbares Problem handelt (\cite{schoening}).
 
 \section{Fazit}
 
-	Diese Ausarbeitung hat gezeigt, wie man mit Hilfe des PKPs für viele weitere Probleme der theoretischen Informatik beweisen kann, dass diese nicht berechenbar sind. Und das obwohl das PKP auf den ersten Blick wie eine harmlose Knobelaufgabe aussieht. Oder ein wenig abstrakter formuliert, wie man mit Hilfe eines Hilfskonstrukts eine Eigenschaft eines Problems für ein weiteres nachweist. Hierzu muss zuerst nachgewiesen werden, dass das Hilfskonstrukt ebenfalls über diese Eigenschaft verfügt. Anschließend muss dieses auf das gewünschte Problem reduziert werden.
+	Diese Ausarbeitung hat gezeigt, wie man mit Hilfe des PKPs für viele weitere Probleme der theoretischen Informatik beweisen kann, dass diese nicht berechenbar sind. Und das trotz dessen, dass das PKP auf den ersten Blick wie eine harmlose Knobelaufgabe aussieht. Oder ein wenig abstrakter formuliert, wie man mit Hilfe eines Hilfskonstrukts eine Eigenschaft eines Problems für ein weiteres Problem nachweist, in dem nachgewiesen wird, dass das Hilfskonstrukt ebenfalls über diese Eigenschaft verfügt. Anschließend muss dieses auf das gewünschte Problem reduziert werden.
 
 \def\refname{Literaturverzeichnis}
 \printbibliography    
