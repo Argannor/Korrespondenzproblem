@@ -6,6 +6,17 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 
+\usepackage[
+	hyperref=true,          % Klickbare Referenzen in der PDF-Datei
+  	backref=true,           % In der Literaturref. die Seiten angeben, wo ein \cite dazu steht
+  	bibencoding=inputenc,   % s. inputenc-Paket
+  	backend = biber,
+  	style = alphabetic,			% [Aut98]
+	%style=authoryear-comp,	% Autor Jahr
+	%style=numeric-comp,		% [1]
+	sorting=nty]{biblatex}  % http://dante.ctan.org/tex-archive/help/Catalogue/entries/biblatex.html
+\bibliography{ausarbeitung}
+
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -18,22 +29,25 @@
 %opening
 \title{Postsches Korrespondenzproblem}
 \author{Soeren Berken-Mersmann}
+\titlehead{\Large DHBW-Karlsruhe}
+\publishers{Betreut durch Prof. Dr. Heinrich Braun}
+
 
 \begin{document}
 
 \maketitle
 
-\begin{abstract}
-
-\end{abstract}
-
 \section{Einleitung}
+
+	Diese Ausarbeitung soll mit Hilfe des Postschen Korrespondenzproblems zeigen, dass es einfacher sein kann einem Problem eine Eigenschaft nachzuweisen in dem ein Zwischenschritt über ein anderes Problem gemacht wird. Konkret soll die Nichtberechenbarkeit für zwei Probleme von kontextfreien Grammatiken bewiesen werden: Der Mehrdeutigkeitstest und das Äquivalenzproblem.
+	
+	Hierbei wird zuerst das Postsche Korrespondenzproblem vorgestellt und erläutert. Anschließend wird das Halteproblem für Turingmaschinen hierauf reduziert um im Abschluss das PKP auf die oben genannten Probleme zu reduzieren und damit deren Nichtberechenbarkeit zu beweisen.
 
 \section{Postsches Korrespondenzproblem}
 
 	\subsection{Definition}
 	
-		Das Postsches Korrespondenzproblem (PKP) ist benannt nach Emil Leon Post. Es handelt sich um ein konstruiertes Problem aus der theoretischen Informatik und ist folgendermaßen definiert:
+		Das Postsches Korrespondenzproblem (PKP) ist benannt nach Emil Leon Post. Es handelt sich um ein konstruiertes Problem aus der theoretischen Informatik und ist folgendermaßen definiert (vgl. \cite{wegener}):
 		
 		\begin{definition}
 			Gegeben sei eine endliche Menge an Wortpaaren $K = ((x_1, y_1), ..., (x_k, y_k))$, über dem Alphabet $\Sigma$ mit $x_i, y_i \in \Sigma$. Gibt es eine Folge von Indizes $i_1, i_2, ..., i_n \in {1, 2, ..., k}, n \geq 1$, so dass $x_{i_1},x_{i_2}, ... x_{i_n} = y_{i_1}, y_{i_2}, ..., y_{i_n}$?
@@ -152,7 +166,7 @@
 			\end{satz}
 		
 		\paragraph{Simulation mit Hilfe des PKPs}
-			Wir benötigen nun Regeln, um aus dem formalisierten Rechenweg einer Turingmaschine eine Instanz des speziellen PKPs\footnote{Das spezielle PKP hat die Einschränkung, dass das Startwortpaar bereits gegeben ist.} konstruieren zu können. Das Ziel ist es, dass die Instanz des PKPs genau dann eine Lösung hat, wenn die damit simulierte Turingmaschine terminiert. Diese Konstruktionsregeln sehen folgendermaßen aus:
+			Wir benötigen nun Regeln, um aus dem formalisierten Rechenweg einer Turingmaschine eine Instanz des speziellen PKPs\footnote{Das spezielle PKP hat die Einschränkung, dass das Startwortpaar bereits gegeben ist.} konstruieren zu können. Das Ziel ist es, dass die Instanz des PKPs genau dann eine Lösung hat, wenn die damit simulierte Turingmaschine terminiert. Diese Konstruktionsregeln sehen folgendermaßen aus (vgl. \cite{wegener}):
 			\begin{definition}
 				\label{def-simulation}
 				Für eine gegebene Turingmaschine $M = (Q, \Sigma, \varGamma, \delta, q_o, \varepsilon ,Q_f)$ mit der Menge der inneren Zustände $Q$, dem Eingabealphabet $\Sigma$, dem Bandalphabet $\varGamma$, dem (inneren) Startzustand $q_0$, dem leeren Symbol $\varepsilon$ sowie der Menge an (inneren) Finalzuständen $Q_f$ kann mit nachfolgenden Regeln eine Instanz eines PKPs konstruiert werden, so dass dieses genau dann eine Lösung hat, wenn die Turingmaschine für das Eingabewort $w$ in einen Endzustand gelangt.
@@ -173,7 +187,7 @@
 
 				\end{tabbing} 
 			\end{definition}
-			Anmerkung: Die hiermit simulierte Turingmaschine bewegt ihren Lese- und Schreibkopf in jedem Rechenschritt entweder nach Rechts oder nach Links. Der Übersichtlichkeit halber wurden zusätzliche Regeln die für den Fall benötigt werden, dass der Kopf den Rand des beschriebenen Teils erreicht, weggelassen. Diese können in WEGENER EINFÜGEN nachgelesen werden.
+			Anmerkung: Die hiermit simulierte Turingmaschine bewegt ihren Lese- und Schreibkopf in jedem Rechenschritt entweder nach Rechts oder nach Links. Der Übersichtlichkeit halber wurden zusätzliche Regeln die für den Fall benötigt werden, dass der Kopf den Rand des beschriebenen Teils erreicht, weggelassen. Diese können in \cite{wegener} nachgelesen werden.
 			
 			Die Simulation des Rechenwegs der Turingmaschine kann man sich folgendermaßen visualisieren: Man hat zwei übereinander stehende Wortfolgen, bei der das untere Wort jeweils die bereits abgeschlossenen Rechenschritte darstellt, und das obere entsprechend zusätzlich den darauf folgenden Rechenschritt abbildet. So eilt das untere Band dem oberen Band so lange hinterher, bis die Aufholregeln eingesetzt werden können, sprich die Turingmaschine einen Finalzustand erreicht hat. Diese Aufholregeln ermöglichen es nun dem unteren Wort Schritt für Schritt aufzuholen, bis nur noch das - aus der Abschlussregel konstruierte - Wortpaar verwendet werden kann, und es das obere Wort einholt. Damit hat diese PKP Instanz genau dann eine Lösung wenn die Turingmaschine einen Finalzustand erreicht. Die Konstruktionsregeln aus Definition \ref{def-simulation} lassen nur unter dieser Bedingung ein Aufholen des unteren Wortes zu.
 			
@@ -219,6 +233,7 @@
 	In diesem Kapitel soll mit Hilfe des PKPs die Nichtberechenbarkeit zweier weiterer Probleme aus dem Gebiet der formalen Sprachen bewiesen werden. Konkret geht es um den Mehrdeutigkeitstest für eine kontextfreie Grammatik und die Frage nach der Äquivalenz zweier kontextfreier Sprachen.
 	
 	\subsection{Mehrdeutigkeitstest}
+	\label{subsec-mehrdeutigkeit}
 		
 		Der Mehrdeutigkeitstest sei wie folgt definiert:
 		\begin{definition}
@@ -250,5 +265,48 @@
 		
 
 	\subsection{Äquivalenzproblem}
+	
+		Die Definition des Äquivalenzproblems lautet wie folgt:
+		
+		\begin{definition}
+			Seien $G_1$ und $G_2$ zwei kontextfreie Grammatiken und $L(G_1)$ sowie $L(G_2)$ die von ihnen erzeugten Sprachen. Dann ist
+			\[
+				\chi_{"Aquivalenz}(G_1, G_2)=\left\{\begin{array}{ll} 1, & L(G_1) = L(G_2) \\
+							         0, &\text{sonst}\end{array}\right. .
+			\]
+		\end{definition}
+		
+		Um zu beweisen, dass das Äquivalenzproblem ebenfalls nicht berechenbar ist, verwenden wir die Grammatiken $G_x$ und $G_y$ aus Abschnitt \ref{subsec-mehrdeutigkeit}. Der Beweis für das Mehrdeutigkeitsproblem hat auch bereits bewiesen, dass das Schnittproblem ($L(G_x) \cap L(G_y) = \emptyset$) nicht berechenbar ist, da hierdurch direkt gezeigt werden könnte, dass die Vereinigung beider Grammatiken eindeutig ist. Ferner lässt sich feststellen, dass beide Grammatiken sogar deterministisch kontextfrei\footnote{Deterministisch kontextfreie Grammatiken bilden eine Teilmenge der kontextfreien Grammatiken und zeichnen sich dadurch aus, dass diese von einem deterministischen Kellerautomaten akzeptiert werden können.} sind. Daher können wir uns die Eigenschaft zu nutze machen, dass det. kfGs unter der Komplementbildung abgeschlossen sind\footnote{Hierzu müssen beim akzeptierenden Kellerautomaten nur die Finalzustandsmengen komplementiert werden.}. Des weiteren sind kfGs - wie bereits in Abschnitt \ref{subsec-mehrdeutigkeit} gezeigt - unter der Vereinigung abgeschlossen.
+
+		\begin{satz}
+		\label{satz-aequivalenz}
+			Durch die folgenden Äquivalenzumformungen lässt sich das Schnittproblem det. kfG auf das Äquivalenzproblem kfG reduzieren:
+			
+			\begin{tabbing}
+				(G1,G2) in Schnittproblem \= Rechts \kill
+				$(G_1, G_2) \in$ Schnittproblem \>$\Leftrightarrow L(G_1) \cap L(G_2) = \emptyset$ \\
+												\>$\Leftrightarrow L(G_1) \subseteq \overline{L(G_2)}$ \\
+												\>$\Leftrightarrow L(G_1) \subseteq L(G'_2)$ \\
+												\>$\Leftrightarrow L(G_1) \cup L(G'_2) = L(G'_2)$ \\
+												\>$\Leftrightarrow L(G_3) = L(G'_2)$ \\
+												\>$\Leftrightarrow (G_3, G'_2) \in$ Äquivalenzproblem 
+			\end{tabbing}
+				Mit dem Übergang zur Komplementgrammatik $G_2 \mapsto G'_2$ (für dkfG) und\\				
+				dem Übergang zur Vereinigungsgrammatik $G_1, G'_2 \mapsto G_3$ (für kfG).
+			Folglich gilt:
+			\[
+				\chi_{PKP}(K) \Leftrightarrow \chi_{Mehrdeutig}(G) \Leftrightarrow \chi_{Schnitt}(G_x, G_y) \Leftrightarrow \chi_{"Aquivalenz}(G_3, G'_2)
+			\]
+			Damit ist bewiesen, dass das Äquivalenzproblem kfG ebenfalls nicht berechenbar ist \cite{schoening}.
+		\end{satz}
+
+		An dieser Stelle sei noch angemerkt, dass sämtliche Zwischenschritte der Umformung in Satz \ref{satz-aequivalenz} selbstverständlich ebenfalls nicht berechenbar sind. Wichtig ist auch, dass dieser Beweis ausschließlich für die jeweiligen Mengen von Grammatiken gilt. Beispielsweise ist noch nicht bewiesen, ob es sich beim Äquivalenzproblem zweier det. kfG ebenfalls um ein nichtberechenbares Problem handelt (\cite{schoening}).
+
+\section{Fazit}
+
+	Diese Ausarbeitung hat gezeigt, wie man mit Hilfe des PKPs für viele weitere Probleme der theoretischen Informatik beweisen kann, dass diese nicht berechenbar sind. Und das obwohl das PKP auf den ersten Blick wie eine harmlose Knobelaufgabe aussieht. Oder ein wenig abstrakter formuliert, wie man mit Hilfe eines Hilfskonstrukts eine Eigenschaft eines Problems für ein weiteres nachweist. Hierzu muss zuerst nachgewiesen werden, dass das Hilfskonstrukt ebenfalls über diese Eigenschaft verfügt. Anschließend muss dieses auf das gewünschte Problem reduziert werden.
+
+\def\refname{Literaturverzeichnis}
+\printbibliography    
 
 \end{document}
