@@ -171,7 +171,7 @@
 			\end{satz}
 		
 		\paragraph{Simulation mit Hilfe des PKPs}
-			Wir benötigen nun Regeln, um aus dem formalisierten Rechenweg einer Turingmaschine eine Instanz des speziellen PKPs\footnote{Das spezielle PKP hat die Einschränkung, dass das Startwortpaar bereits gegeben ist.} konstruieren zu können. Das Ziel ist es, dass die Instanz des PKPs genau dann eine Lösung hat, wenn die damit simulierte Turingmaschine terminiert. Folglich spiegelt die Wortfolge des PKPs den Rechenweg der Turingmaschine wider.
+			Wir benötigen nun Regeln, um aus dem formalisierten Rechenweg einer Turingmaschine eine Instanz des speziellen PKPs\footnote{Das spezielle PKP hat die Einschränkung, dass eine Lösung mit dem ersten Wortpaar anfangen muss: $I = i_1, i_2, ..., i_n$ mit $i_1 = 1$.} konstruieren zu können. Das Ziel ist es, dass die Instanz des PKPs genau dann eine Lösung hat, wenn die damit simulierte Turingmaschine terminiert. Folglich spiegelt die Wortfolge des PKPs den Rechenweg der Turingmaschine wider.
 			
 			Die drei Kernkomponenten sind die Kopierregeln, mit denen die unveränderten Teile des Zustands (sprich der Links und der Rechtskontext) jeweils in den Folgezustand kopiert werden. Die Überführungsregeln, die die Zustandsübergangsfunktionen der Turingmaschine abbilden. Sowie die Aufholregeln die es dem PKP ermöglichen zu einer Lösung zu gelangen wenn die Turingmaschine einen Finalzustand erreicht hat. Darüber hinaus werden noch die Anfangs- und Abschlussregeln gebraucht um das PKP auf den Ausgangszustand der Turingmaschine zu initialisieren und die Lösung des PKPs zu bilden.
 			
@@ -253,16 +253,16 @@
 			  \]
 		\end{definition}
 		
-		Um das PKP auf den Mehrdeutigkeitstest zu reduzieren konstruieren wir zu einer gegebenen Instanz des PKPs mit $K = \left\lbrace (x1, y_1), ..., (x_k, y_k) \right\rbrace$ über dem endlichen Alphabet $\Sigma$ und den zusätzlichen Symbolen $I = \{a_1, ..., a_k\} \notin \Sigma$ zunächst zwei kontextfreie Grammatiken die offensichtlich eindeutig sind:
+		Um das spezielle PKP auf den Mehrdeutigkeitstest zu reduzieren konstruieren wir zu einer gegebenen Instanz des speziellen PKPs mit $K = \left\lbrace (x_1, y_1), ..., (x_k, y_k) \right\rbrace$ über dem endlichen Alphabet $\Sigma$ und den zusätzlichen Symbolen $I = \{a_1, ..., a_k\} \notin \Sigma$ zunächst zwei kontextfreie Grammatiken die offensichtlich eindeutig sind:
 		\newline\newline
-		$G_x = (\{S_x\}, T, P_x, S_x)$ mit $T = \Sigma \cup I$ und $P_x = \{S_x \rightarrow x_1 S_x a_1 | ... | x_n S_x a_n | x_1 a_1 | ... | x_n a_n\}$.\\ \\
+		$G_x = (\{S_x\}, T, P_x, S_x)$ mit $T = \Sigma \cup I$ und $P_x = \{S_x \rightarrow x_1 S_x a_1 | ... | x_n S_x a_n | x_1 a_1\}$.\\ \\
 		Analog dazu konstruieren wir eine zweite Grammatik $G_y$. Sowie eine dritte Grammatik $G$ mit \newline\newline
 		$G = (\{S, S_x, S_y\}, T, P, S)$, mit $P = (S \rightarrow S_x | S_y) \cup P_x \cup P_y$.\\
 		
 		Es lassen sich folgende Beobachtungen machen:
 		\begin{itemize}
 		\item Wie bereits festgestellt sind $G_x$ und $G_y$ offensichtlich eindeutig.
-		\item Die Grammatiken $G_x$ und $G_y$ erzeugen alle Wörter der Form $x_{i_k}...x_{i_1}a_{i_1}...a_{i_k}$ und $y_{i_k}...y_{i_1}a_{i_1}...a_{i_k}$.
+		\item Die Grammatiken $G_x$ und $G_y$ erzeugen alle Wörter der Form $x_{i_k}...x_{i_1}a_{i_1}...a_{i_k}$ und $y_{i_k}...y_{i_1}a_{i_1}...a_{i_k}$. Wobei gilt $x_{i_1} = x_1$ und $a_{i_1} = a_1$ und analog für $y_{i_1}$.
 		\item $G$ ist genau dann mehrdeutig, wenn $G_x$ und $G_y$ mindestens ein gemeinsames Wort erzeugen.
 		\item Wenn $G$ mehrdeutig ist, dann hat das PKP folglich mindestens eine Lösung $x_{i_k}...x_{i_1} = y_{i_k}...y_{i_1}$ mit der Indexfolge $I = {i_1, i_2, ... i_k}$.
 		\end{itemize}
